@@ -1,3 +1,9 @@
+### ---------------------
+###   CSCE-606.600
+###   PA1 - Ruby Intro
+###   Ryan Kafka
+### ---------------------
+
 # frozen_string_literal: true
 
 # Part 1
@@ -94,5 +100,47 @@ end
 
 # Object representing a book
 class BookInStock
-  # YOUR CODE HERE
+  # represents a book!
+  #   attributes:
+  #   - ISBN Number (string)
+  #   - Price (float)
+
+  # constructor: accepts ISBN# and price
+  def initialize(isbn_in, price_in)
+    raise ArgumentError.new(
+      "Expected a non-empty ISBN Number."
+    ) if(isbn_in == "")
+    raise ArgumentError.new(
+      "Expected a price that is greater than $0."
+    ) if (price_in <= 0.0)
+
+    @isbn = isbn_in
+    @price = price_in
+  end
+
+  def isbn
+    return @isbn
+  end
+
+  def price
+    return @price
+  end
+
+  def isbn=(isbn_new)
+    @isbn = isbn_new
+  end
+
+  def price=(price_new)
+    @price = price_new
+  end
+
+  def price_as_string
+    output = "$%.2f" % [price]
+    if(price <= 0)
+      output += 0.00
+    else
+      output = "$%.2f" % [price]
+    end
+    return output
+  end
 end
