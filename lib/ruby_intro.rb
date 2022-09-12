@@ -51,14 +51,43 @@ end
 
 def hello(name)
   # @param name: string representing a name
+  # @return the string hello concatenated with 'name'
+  return "Hello, " + name
 end
 
 def starts_with_consonant?(string)
-  # YOUR CODE HERE
+  # @param string: string being checked
+  # @return whether the given string's first letter is a consonant
+  if string.length == 0
+    return false
+  end
+  firstLetter = string[0]
+  vowels = ['A', 'a', 'E', 'e', 'I', 'i', 'O', 'o', 'U', 'u']
+  return ((!vowels.include?(firstLetter)) && firstLetter.match?(/[A-Z]/i))
 end
 
 def binary_multiple_of_4?(string)
-  # YOUR CODE HERE
+  # @param string: a string being checked
+  # @return whether the string reprents a binary number that is a multiple of 4
+  result = false
+  errorFlag = "1"
+  last3 = " "
+  if (string.length >= 3)
+    errorFlag = "2"
+    if(string !~ /[^01]/)
+      errorFlag = "3"
+      last3 = string.chars.last(3).join
+      if (string.chars.last(3).join == "100")
+        result = true
+      end
+    end
+  elsif(string[0] == '0')
+    if ((string.length == 1) || (string[1] == '0'))
+      result = true
+    end
+  end
+  #puts string + "(" + last3 + ") --> " + result.to_s + "[" + errorFlag + "]"
+  return result
 end
 
 # Part 3
