@@ -9,14 +9,19 @@
 # Part 1
 
 def sum(arr)
-  # sum up the values of an integer array
-  # empty array should return zero
-  if(arr.length == 0)
-    return 0
-  else
-    return arr.inject(:+)
-  end
-  # alt option:
+  #RJK# sum up the values of an integer array
+  #RJK# empty array should return zero
+  #RJK#  if(arr.length == 0)
+  #RJK#    return 0
+  #RJK#  else
+  #RJK#    return arr.inject(:+)
+  #RJK#  end
+  #RJK# alt option 2:
+  #RJK# Start with a base of zero and add items in the list to it
+  return arr.inject(0) {|res,obj| res + obj }
+
+  #
+  # alt option 2:
   #sumValue = 0
   #for i in range 0..(arr.length-1)
   # sumValue += arr[i]
@@ -25,18 +30,19 @@ def sum(arr)
 end
 
 def max_2_sum(arr)
-  # @param arr: an array of integers
-  # @return the sum of its two largest elements
-  #           (empty array returns zero)
-  #           (1 elemnt array returns that element)
-  if(arr.length == 0)
-    return 0;
-  elsif(arr.length == 1)
-    return arr[0];
-  else
-    top2 = arr.max(2)
-    return sum(top2)
-  end
+  #RJK# @param arr: an array of integers
+  #RJK# @return the sum of its two largest elements
+  #RJK#           (empty array returns zero)
+  #RJK#           (1 elemnt array returns that element)
+  #RJK# if(arr.length == 0)
+  #RJK#   return 0;
+  #RJK# elsif(arr.length == 1)
+  #RJK#   return arr[0];
+  #RJK# else
+  #RJK#   top2 = arr.max(2)
+  #RJK#   return sum(top2)
+  #RJK# end
+  return sum(arr.max(2))
 end
 
 def sum_to_n?(arr, number)
@@ -73,27 +79,28 @@ def starts_with_consonant?(string)
 end
 
 def binary_multiple_of_4?(string)
-  # @param string: a string being checked
-  # @return whether the string reprents a binary number that is a multiple of 4
-  result = false
-  errorFlag = "1"
-  last3 = " "
-  if (string.length >= 3)
-    errorFlag = "2"
-    if(string !~ /[^01]/)
-      errorFlag = "3"
-      last3 = string.chars.last(3).join
-      if (string.chars.last(3).join == "100")
-        result = true
-      end
-    end
-  elsif(string[0] == '0')
-    if ((string.length == 1) || (string[1] == '0'))
-      result = true
-    end
-  end
-  #puts string + "(" + last3 + ") --> " + result.to_s + "[" + errorFlag + "]"
-  return result
+  #RJK# @param string: a string being checked
+  #RJK# @return whether the string reprents a binary number that is a multiple of 4
+  #RJK# result = false
+  #RJK# errorFlag = "1"
+  #RJK# last3 = " "
+  #RJK# if (string.length >= 3)
+  #RJK#   errorFlag = "2"
+  #RJK#   if(string !~ /[^01]/)
+  #RJK#     errorFlag = "3"
+  #RJK#     last3 = string.chars.last(3).join
+  #RJK#     if (string.chars.last(3).join == "100")
+  #RJK#       result = true
+  #RJK#     end
+  #RJK#   end
+  #RJK# elsif(string[0] == '0')
+  #RJK#   if ((string.length == 1) || (string[1] == '0'))
+  #RJK#     result = true
+  #RJK#   end
+  #RJK# end
+  #RJK# #puts string + "(" + last3 + ") --> " + result.to_s + "[" + errorFlag + "]"
+  #RJK# return result
+  return (string.length>0 && (string !~ /[^01]/) && (string.to_i(2) % 4)==0)
 end
 
 # Part 3
@@ -104,6 +111,9 @@ class BookInStock
   #   attributes:
   #   - ISBN Number (string)
   #   - Price (float)
+
+  #RJK# https://wwwrubyguides.com/2018/11/attr_accessor/
+  attr_accessor :isbn, :price
 
   # constructor: accepts ISBN# and price
   def initialize(isbn_in, price_in)
@@ -118,30 +128,31 @@ class BookInStock
     @price = price_in
   end
 
-  def isbn
-    return @isbn
-  end
-
-  def price
-    return @price
-  end
-
-  def isbn=(isbn_new)
-    @isbn = isbn_new
-  end
-
-  def price=(price_new)
-    @price = price_new
-  end
-
+#RJK#  def isbn
+#RJK#    return @isbn
+#RJK#  end
+#RJK#  
+#RJK#  def price
+#RJK#    return @price
+#RJK#  end
+#RJK#  
+#RJK#  def isbn=(isbn_new)
+#RJK#    @isbn = isbn_new
+#RJK#  end
+#RJK#  
+#RJK#  def price=(price_new)
+#RJK#    @price = price_new
+#RJK#  end
+#RJK#  
     # Returns price as a formatted string with $ sign, commas and 2 decimal places
   def price_as_string
-    output = "$%.2f" % [price]
-    if(price <= 0)
-      output += 0.00
-    else
-      output = "$%.2f" % [price]
-    end
-    return output
+    #RJK# output = "$%.2f" % [price]
+    #RJK# if(price <= 0)
+    #RJK#   output += 0.00
+    #RJK# else
+    #RJK#   output = "$%.2f" % [price]
+    #RJK# end
+    #RJK# return output
+    return "$%.2f" % [price.to_f]
   end
 end
