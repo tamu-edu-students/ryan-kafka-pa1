@@ -134,6 +134,7 @@ class BookInStock
     @price = price_new
   end
 
+    # Returns price as a formatted string with $ sign, commas and 2 decimal places
   def price_as_string
     output = "$%.2f" % [price]
     if(price <= 0)
